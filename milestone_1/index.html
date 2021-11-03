@@ -18,7 +18,7 @@
 <body>
     <header></header>
     <main>
-        <div class="container mainApp p-0">
+        <div class="container mainApp p-0" id="vueApp">
             <div class="row g-0 h-100">
                 <div class="col-4 ">
                     <div class="left-block">
@@ -41,10 +41,25 @@
                             </div>
                         </div>
 
-                        <div class="search_bar p-1">
+                        <div class="search_bar p-2">
                             <!-- <i class="fas fa-search nav_icon"></i> -->
                             <input type="text" name="" id="search" class="form-control "
                                 placeholder="Cerca o inizia una nuova chat">
+                        </div>
+
+                        <div class="chat_list flex-grow-1">
+                            <div class="chat_tile" :class="selectedContact===i ?'active':''"
+                                v-for="contact,i in contacts">
+                                <img :src="`img/avatar${contact.avatar}.jpg`" alt="user 1 profile picture"
+                                    class="circle-image">
+                                <div class="text_tile  flex-grow-1 ">
+                                    <div class="title_row d-flex justify-content-between">
+                                        <h5 class="title">{{contact.name}}</h5>
+                                        <p class="chat_timestamp ">{{contact.messages.at(-1).date}}</p>
+                                    </div>
+                                    <p class="subtitle">{{contact.messages.at(-1).text}}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -60,6 +75,25 @@
                             <i class="fas fa-paperclip nav_icon"></i>
                             <i class="fas fa-ellipsis-v nav_icon"></i>
                         </nav>
+                        <div class="chat_container flex-grow-1">
+                            <div class="chat_message">
+                                <p class="chat_message__text">Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                                    Commodi ducimus voluptatum, aliquid at, corrupti ullam est accusantium possimus
+                                    itaque, qui in incidunt dicta eligendi temporibus perspiciatis! Ad, impedit sint?
+                                    Nisi!</p>
+                                <p class="chat_message__timestamp">10/11/2020 16:55:22</p>
+                            </div>
+                            <div class="chat_message sent">
+                                <p class="chat_message__text">Testo 123 prova sa sa prova</p>
+                                <p class="chat_message__timestamp">10/11/2020 16:58:22</p>
+                            </div>
+                        </div>
+                        <div class="chat_input_row">
+                            <i class="far fa-smile chat_input_row__icon "></i>
+                            <input class="form-control flex-grow-1" type="text" id="message_input"
+                                placeholder="Scrivi un messaggio">
+                            <i class="fas fa-microphone chat_input_row__icon "></i>
+                        </div>
                     </div>
                 </div>
 
