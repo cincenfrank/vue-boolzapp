@@ -82,6 +82,10 @@ main {
 }
 .chat_tile .subtitle {
   color: #b6b9bb;
+  max-width: 75%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .chat_tile .chat_timestamp {
   color: #b6b9bb;
