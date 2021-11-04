@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BoolzApp</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.7/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="js/script.js"></script>
+</head>
+
+<body>
+    <header></header>
+    <main>
+        <div class="container mainApp p-0" id="vueApp">
+            <div class="row g-0 h-100">
+                <div class="col-4 ">
+                    <div class="left-block">
+                        <nav class="custom-nav">
+                            <img src="img/avatar_io.jpg" alt="user profile picture" class="circle-image">
+                            <div class="text_tile  flex-grow-1">
+                                <h5 class="title">Nome Utente</h5>
+                            </div>
+                            <a href="#">
+                                <i class="fas fa-circle-notch nav_icon"></i>
+                            </a>
+                            <a href="#">
+                                <i class="fas fa-comment-alt nav_icon"></i>
+                            </a>
+                            <a href="#">
+                                <i class="fas fa-ellipsis-v nav_icon"></i>
+                            </a>
+                        </nav>
+
+                        <div class="notification_banner">
+                            <i class="fas fa-bell-slash circle-image notification_icon"></i>
+                            <div class="text_tile  flex-grow-1">
+                                <h5 class="title">Ricevi notifiche di nuovi messaggi</h5>
+                                <a href="#" class="subtitle">Attiva notifiche desktop</a>
+                            </div>
+                        </div>
+
+                        <div class="search_bar">
+                            <i class="fas fa-search nav_icon"></i>
+                            <input type="text" name="" id="search" class="form-control search_input"
+                                v-model="searchString" placeholder="Cerca o inizia una nuova chat">
+                        </div>
+
+                        <div class="chat_list flex-grow-1">
+                            <div class="chat_tile" @click="setSelectedContact(contact)"
+                                :class="selectedContact===contact ?'active':''"
+                                v-for="contact in getFilteredContactList(searchString)">
+                                <img :src="`img/avatar${contact.avatar}.jpg`" alt="user 1 profile picture"
+                                    class="circle-image">
+                                <div class="text_tile  flex-grow-1 ">
+                                    <div class="title_row d-flex justify-content-between">
+                                        <h5 class="title">{{contact.name}}</h5>
+                                        <p class="chat_timestamp ">{{contact.messages.at(-1).date}}</p>
+                                    </div>
+                                    <p class="subtitle">{{contact.messages.at(-1).text}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-8 ">
+                    <div class="right-block">
+                        <nav class="custom-nav">
+                            <img :src="`img/avatar${selectedContact.avatar}.jpg`" alt="user 1 profile picture"
+                                class="circle-image">
+                            <div class="text_tile  flex-grow-1">
+                                <h5 class="title">{{selectedContact.name}}</h5>
+                                <p class="subtitle">{{`Ultimo accesso ${ getLastReceivedDateTime()} `}}</p>
+                            </div>
+                            <a href="#">
+                                <i class="fas fa-search nav_icon"></i>
+                            </a>
+                            <a href="#">
+                                <i class="fas fa-paperclip nav_icon"></i>
+                            </a>
+                            <a href="#">
+                                <i class="fas fa-ellipsis-v nav_icon"></i>
+                            </a>
+                        </nav>
+                        <div class="chat_container flex-grow-1">
+                            <div class="chat_message" :class="message.status=='sent'?'sent':''"
+                                v-for="message in selectedContact.messages">
+                                <p class="chat_message__text">{{message.text}}</p>
+                                <p class="chat_message__timestamp">{{message.date}}</p>
+                            </div>
+                        </div>
+                        <div class="chat_input_row">
+                            <a href="#">
+                                <i class="far fa-smile chat_input_row__icon "></i>
+                            </a>
+                            <input class="form-control flex-grow-1" type="text" id="message_input" v-model="newMessage"
+                                v-on:keyup.enter="addNewMessage(newMessage)" placeholder="Scrivi un messaggio">
+                            <a href="#">
+                                <i class="fas fa-microphone chat_input_row__icon "></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+    <footer></footer>
+</body>
+
+</html>
