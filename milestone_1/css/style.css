@@ -134,3 +134,13 @@ main {
   font-size: 30px;
   color: #6b7375;
 }
+
+.search_bar {
+  display: flex;
+  border: 1px solid #ced4da;
+  margin: 8px;
+  background-color: white;
+}
+.search_input {
+  border: none;
+}
