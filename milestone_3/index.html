@@ -49,12 +49,13 @@
                         <div class="search_bar">
                             <i class="fas fa-search nav_icon"></i>
                             <input type="text" name="" id="search" class="form-control search_input"
-                                placeholder="Cerca o inizia una nuova chat">
+                                v-model="searchString" placeholder="Cerca o inizia una nuova chat">
                         </div>
 
                         <div class="chat_list flex-grow-1">
-                            <div class="chat_tile" @click="setSelectedContact(i)"
-                                :class="selectedContact===i ?'active':''" v-for="contact,i in contacts">
+                            <div class="chat_tile" @click="setSelectedContact(contact)"
+                                :class="selectedContact===contact ?'active':''"
+                                v-for="contact in getFilteredContactList(searchString)">
                                 <img :src="`img/avatar${contact.avatar}.jpg`" alt="user 1 profile picture"
                                     class="circle-image">
                                 <div class="text_tile  flex-grow-1 ">
@@ -71,10 +72,11 @@
                 <div class="col-8 ">
                     <div class="right-block">
                         <nav class="custom-nav">
-                            <img src="img/avatar_1.jpg" alt="user 1 profile picture" class="circle-image">
+                            <img :src="`img/avatar${selectedContact.avatar}.jpg`" alt="user 1 profile picture"
+                                class="circle-image">
                             <div class="text_tile  flex-grow-1">
-                                <h5 class="title">Michele</h5>
-                                <p class="subtitle">Ultimo accesso oggi alle 10/01/2020 alle 16:55</p>
+                                <h5 class="title">{{selectedContact.name}}</h5>
+                                <p class="subtitle">{{`Ultimo accesso ${ getLastReceivedDateTime()} `}}</p>
                             </div>
                             <a href="#">
                                 <i class="fas fa-search nav_icon"></i>
@@ -88,7 +90,7 @@
                         </nav>
                         <div class="chat_container flex-grow-1">
                             <div class="chat_message" :class="message.status=='sent'?'sent':''"
-                                v-for="message in contacts[selectedContact].messages">
+                                v-for="message in selectedContact.messages">
                                 <p class="chat_message__text">{{message.text}}</p>
                                 <p class="chat_message__timestamp">{{message.date}}</p>
                             </div>

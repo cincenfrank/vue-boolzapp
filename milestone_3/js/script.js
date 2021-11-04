@@ -3,8 +3,6 @@ window.addEventListener("DOMContentLoaded", () => {
   const vueApp = new Vue({
     el: "#vueApp",
     data: {
-      selectedContact: 0,
-      newMessage: "",
       contacts: [
         {
           name: "Michele",
@@ -90,21 +88,24 @@ window.addEventListener("DOMContentLoaded", () => {
           ],
         },
       ],
+      selectedContact: {},
+      newMessage: "",
+      searchString: "",
     },
     methods: {
       /**
        *
-       * @param {number} newIndex
+       * @param {{}} newContact
        */
-      setSelectedContact(newIndex) {
-        this.selectedContact = newIndex;
+      setSelectedContact(newContact) {
+        this.selectedContact = newContact;
       },
       /**
        *
        * @param {string} inputMessage
        */
       validateMessage(inputMessage) {
-        if (inputMessage.trim === "") {
+        if (inputMessage.trim() === "") {
           return false;
         }
         return true;
@@ -127,7 +128,7 @@ window.addEventListener("DOMContentLoaded", () => {
         }
       },
       pushMessageOnActiveChat(newMsgObj) {
-        this.contacts[this.selectedContact].messages.push(newMsgObj);
+        this.selectedContact.messages.push(newMsgObj);
       },
       resetMessageInput() {
         this.newMessage = "";
@@ -143,6 +144,38 @@ window.addEventListener("DOMContentLoaded", () => {
       getDateString() {
         return "xxxxx";
       },
+      /**
+       *
+       * @param {string} searchString
+       * @returns
+       */
+      getFilteredContactList(searchString) {
+        /**
+         * @type {[{}]}
+         */
+        const originalList = this.contacts;
+        if (searchString) {
+          searchString.trim().toLowerCase();
+          return originalList.filter((element) =>
+            element.name
+              .toLowerCase()
+              .includes(searchString.trim().toLowerCase())
+          );
+        } else {
+          return originalList;
+        }
+      },
+      getLastReceivedDateTime() {
+        if (this.selectedContact.messages) {
+          const arrayCopy = [...this.selectedContact.messages];
+          return arrayCopy
+            .reverse()
+            .find((element) => element.status === "received").date;
+        }
+      },
+    },
+    beforeMount() {
+      this.setSelectedContact(this.contacts[0]);
     },
   });
 });
