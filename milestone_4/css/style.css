@@ -75,6 +75,7 @@ main {
   padding: 8px;
   border-top: 1px solid #e9e8e8;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 .chat_tile.active {
   background-color: #e9ebea;
