@@ -6,7 +6,6 @@ main {
 }
 .mainApp {
   height: 100%;
-  overflow: hidden;
 }
 
 .left-block {
@@ -15,14 +14,12 @@ main {
   border-right: 2px solid #d6d5d6;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 }
 .right-block {
   background-color: white;
   height: 100%;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 }
 .custom-nav {
   display: flex;

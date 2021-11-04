@@ -116,17 +116,32 @@ window.addEventListener("DOMContentLoaded", () => {
       addNewMessage(newMessage) {
         if (this.validateMessage(newMessage)) {
           const newMsgObj = {
-            date: "xxxxx",
+            date: this.getDateString(),
             text: newMessage.trim(),
             status: "sent",
           };
 
-          this.contacts[this.selectedContact].messages.push(newMsgObj);
+          this.pushMessageOnActiveChat(newMsgObj);
           this.resetMessageInput();
+          setTimeout(this.sendAutomaticResponse, 1000);
         }
+      },
+      pushMessageOnActiveChat(newMsgObj) {
+        this.contacts[this.selectedContact].messages.push(newMsgObj);
       },
       resetMessageInput() {
         this.newMessage = "";
+      },
+      sendAutomaticResponse() {
+        const newMessage = {
+          date: this.getDateString(),
+          text: "New Automatic Message Reply",
+          status: "received",
+        };
+        this.pushMessageOnActiveChat(newMessage);
+      },
+      getDateString() {
+        return "xxxxx";
       },
     },
   });
