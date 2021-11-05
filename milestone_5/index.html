@@ -24,7 +24,7 @@
     <main>
         <div class="container mainApp p-0" id="vueApp">
             <div class="row g-0 h-100">
-                <div class="col-4 ">
+                <div class="col-4 h-100">
                     <div class="left-block">
                         <nav class="custom-nav">
                             <img src="img/avatar_io.jpg" alt="user profile picture" class="circle-image">
@@ -74,7 +74,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-8 ">
+                <div class="col-8 h-100">
                     <div class="right-block">
                         <nav class="custom-nav">
                             <img :src="`img/avatar${selectedContact.avatar}.jpg`" alt="user 1 profile picture"
@@ -93,7 +93,7 @@
                                 <i class="fas fa-ellipsis-v nav_icon"></i>
                             </a>
                         </nav>
-                        <div class="chat_container flex-grow-1">
+                        <div class="chat_container">
                             <div class="chat_message" :class="message.status=='sent'?'sent':''"
                                 v-for="message, i in selectedContact.messages">
                                 <div class="chat_message_first-row">
