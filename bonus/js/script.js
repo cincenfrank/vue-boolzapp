@@ -182,7 +182,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
           this.pushMessageOnActiveChat(newMsgObj);
           this.resetMessageInput();
-          this.scrollToLastMessage();
+          setTimeout(this.scrollToLastMessage, 500);
           setTimeout(this.sendAutomaticResponse, 1000);
         }
       },
@@ -191,7 +191,7 @@ window.addEventListener("DOMContentLoaded", () => {
         // last = items[items.length - 1];
         debugger;
         last = document.querySelector(".chat_container");
-        last.scrollTop = last.scrollHeight + 100;
+        last.scrollTop = last.scrollHeight + last.offsetHeight;
         // last.scrollIntoView({ block: "end", inline: "nearest" });
       },
       getDateString() {
@@ -210,7 +210,7 @@ window.addEventListener("DOMContentLoaded", () => {
           status: "received",
         };
         this.pushMessageOnActiveChat(newMessage);
-        this.scrollToLastMessage();
+        setTimeout(this.scrollToLastMessage, 500);
       },
 
       /**
