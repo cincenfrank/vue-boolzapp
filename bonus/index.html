@@ -56,7 +56,7 @@
                             <input type="text" name="" id="search" class="form-control search_input"
                                 v-model="searchString" placeholder="Cerca o inizia una nuova chat">
                         </div>
-                        <transition-group class="chat_list flex-grow-1" name="staggered-fade" tag="ul" :css="false"
+                        <transition-group class="chat_list flex-grow-1 p-0" name="staggered-fade" tag="ul" :css="false"
                             @before-enter="beforeEnter" @enter="enter" @leave="leave">
                             <!-- <div class="chat_list flex-grow-1"> -->
                             <div class="chat_tile" @click="setSelectedContact(contact)"
