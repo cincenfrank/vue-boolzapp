@@ -133,7 +133,8 @@
                                 <i class="far fa-smile chat_input_row__icon "></i>
                             </a>
                             <input class="form-control flex-grow-1" type="text" id="message_input" v-model="newMessage"
-                                v-on:keyup.enter="addNewMessage(newMessage)" placeholder="Scrivi un messaggio">
+                                v-on:keyup.enter="addNewMessage(newMessage)" placeholder="Scrivi un messaggio"
+                                :disabled="Object.keys(selectedContact).length===0">
                             <a href="#">
                                 <i v-if="newMessage===''" class="fas fa-microphone chat_input_row__icon "></i>
                                 <i v-else @click="addNewMessage(newMessage)"

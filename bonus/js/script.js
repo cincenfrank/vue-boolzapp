@@ -189,7 +189,6 @@ window.addEventListener("DOMContentLoaded", () => {
       scrollToLastMessage() {
         // items = document.querySelectorAll(".chat_message");
         // last = items[items.length - 1];
-        debugger;
         last = document.querySelector(".chat_container");
         last.scrollTop = last.scrollHeight + last.offsetHeight;
         // last.scrollIntoView({ block: "end", inline: "nearest" });
