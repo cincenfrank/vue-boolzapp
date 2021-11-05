@@ -136,7 +136,7 @@ window.addEventListener("DOMContentLoaded", () => {
       sendAutomaticResponse() {
         const newMessage = {
           date: this.getDateString(),
-          text: "New Automatic Message Reply",
+          text: "Ok",
           status: "received",
         };
         this.pushMessageOnActiveChat(newMessage);
